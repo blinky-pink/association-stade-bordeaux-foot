@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlayerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -47,6 +49,17 @@ class Player
     #[ORM\ManyToOne(inversedBy: 'Players')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Team $Team = null;
+
+    /**
+     * @var Collection<int, Responsable>
+     */
+    #[ORM\OneToMany(targetEntity: Responsable::class, mappedBy: 'Player')]
+    private Collection $responsables;
+
+    public function __construct()
+    {
+        $this->responsables = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -181,6 +194,36 @@ class Player
     public function setTeam(?Team $Team): static
     {
         $this->Team = $Team;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Responsable>
+     */
+    public function getResponsables(): Collection
+    {
+        return $this->responsables;
+    }
+
+    public function addResponsable(Responsable $responsable): static
+    {
+        if (!$this->responsables->contains($responsable)) {
+            $this->responsables->add($responsable);
+            $responsable->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResponsable(Responsable $responsable): static
+    {
+        if ($this->responsables->removeElement($responsable)) {
+            // set the owning side to null (unless already changed)
+            if ($responsable->getPlayer() === $this) {
+                $responsable->setPlayer(null);
+            }
+        }
 
         return $this;
     }
