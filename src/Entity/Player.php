@@ -56,9 +56,16 @@ class Player
     #[ORM\OneToMany(targetEntity: Responsable::class, mappedBy: 'Player')]
     private Collection $responsables;
 
+    /**
+     * @var Collection<int, Presence>
+     */
+    #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'Player')]
+    private Collection $presences;
+
     public function __construct()
     {
         $this->responsables = new ArrayCollection();
+        $this->presences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -222,6 +229,36 @@ class Player
             // set the owning side to null (unless already changed)
             if ($responsable->getPlayer() === $this) {
                 $responsable->setPlayer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Presence>
+     */
+    public function getPresences(): Collection
+    {
+        return $this->presences;
+    }
+
+    public function addPresence(Presence $presence): static
+    {
+        if (!$this->presences->contains($presence)) {
+            $this->presences->add($presence);
+            $presence->setPlayer($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresence(Presence $presence): static
+    {
+        if ($this->presences->removeElement($presence)) {
+            // set the owning side to null (unless already changed)
+            if ($presence->getPlayer() === $this) {
+                $presence->setPlayer(null);
             }
         }
 

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,6 +31,17 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Coach $Coach = null;
+
+    /**
+     * @var Collection<int, Presence>
+     */
+    #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'Event')]
+    private Collection $presences;
+
+    public function __construct()
+    {
+        $this->presences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,6 +104,36 @@ class Event
     public function setCoach(?Coach $Coach): static
     {
         $this->Coach = $Coach;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Presence>
+     */
+    public function getPresences(): Collection
+    {
+        return $this->presences;
+    }
+
+    public function addPresence(Presence $presence): static
+    {
+        if (!$this->presences->contains($presence)) {
+            $this->presences->add($presence);
+            $presence->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removePresence(Presence $presence): static
+    {
+        if ($this->presences->removeElement($presence)) {
+            // set the owning side to null (unless already changed)
+            if ($presence->getEvent() === $this) {
+                $presence->setEvent(null);
+            }
+        }
 
         return $this;
     }
