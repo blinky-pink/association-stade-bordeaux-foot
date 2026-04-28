@@ -33,10 +33,17 @@ class Coach
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'Coach')]
     private Collection $events;
 
+    /**
+     * @var Collection<int, Message>
+     */
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'Coach')]
+    private Collection $messages;
+
     public function __construct()
     {
         $this->teams = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,6 +129,36 @@ class Coach
             // set the owning side to null (unless already changed)
             if ($event->getCoach() === $this) {
                 $event->setCoach(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): static
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages->add($message);
+            $message->setCoach($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): static
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getCoach() === $this) {
+                $message->setCoach(null);
             }
         }
 
