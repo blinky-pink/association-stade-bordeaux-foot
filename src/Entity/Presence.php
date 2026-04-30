@@ -14,18 +14,18 @@ class Presence
     private ?int $id = null;
 
     #[ORM\Column(length: 20)]
-    private ?string $Status = null;
+    private ?string $status = null;
 
     #[ORM\Column]
-    private ?\DateTime $Date = null;
+    private ?\DateTime $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'presences')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Player $Player = null;
+    private ?Player $player = null;
 
     #[ORM\ManyToOne(inversedBy: 'presences')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Event $Event = null;
+    private ?Event $event = null;
 
     public function getId(): ?int
     {
@@ -34,48 +34,48 @@ class Presence
 
     public function getStatus(): ?string
     {
-        return $this->Status;
+        return $this->status;
     }
 
-    public function setStatus(string $Status): static
+    public function setStatus(string $status): static
     {
-        $this->Status = $Status;
+        $this->status = $status;
 
         return $this;
     }
 
     public function getDate(): ?\DateTime
     {
-        return $this->Date;
+        return $this->date;
     }
 
-    public function setDate(\DateTime $Date): static
+    public function setDate(\DateTime $date): static
     {
-        $this->Date = $Date;
+        $this->date = $date;
 
         return $this;
     }
 
     public function getPlayer(): ?Player
     {
-        return $this->Player;
+        return $this->player;
     }
 
-    public function setPlayer(?Player $Player): static
+    public function setPlayer(?player $player): static
     {
-        $this->Player = $Player;
+        $this->player = $player;
 
         return $this;
     }
 
     public function getEvent(): ?Event
     {
-        return $this->Event;
+        return $this->event;
     }
 
-    public function setEvent(?Event $Event): static
+    public function setEvent(?event $event): static
     {
-        $this->Event = $Event;
+        $this->event = $event;
 
         return $this;
     }

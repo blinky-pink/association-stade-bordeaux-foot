@@ -13,15 +13,23 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AttendanceController extends AbstractController
 {
-    #[Route('/team/{id}/attendance', name: 'team_attendance')]
-    public function index(Team $team, EntityManagerInterface $em): Response
+    #[Route('/team/{id}/attendance/{eventId}', name: 'team_attendance')]
+    public function index(Team $team, int $eventId, EntityManagerInterface $em): Response
     {
-        $presences = $em->getRepository(Presence::class)->findAll();
+        $event = $em->getRepository(Event::class)->find($eventId);
+        
+        if (!$event) {
+            throw $this->createNotFoundException();
+        }
+        $presences = $em->getRepository(Presence::class)->findBy([
+            'event' => $event
+        ]);
 
         return $this->render('attendance/index.html.twig', [
             'team' => $team,
             'players' => $team->getPlayers(),
             'presences' => $presences,
+            'event' => $event,
         ]);
     }
 
@@ -60,7 +68,8 @@ class AttendanceController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('team_attendance', [
-            'id' => $player->getTeam()->getId()
+            'id' => $player->getTeam()->getId(),
+            'eventId' => $event->getid(),
         ]);
     }
 }

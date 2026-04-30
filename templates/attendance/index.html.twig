@@ -5,6 +5,8 @@
 {% block body %}
 <h1>Equipe : {{ team.name }}</h1>
 
+<h2>Event : {{ event.title }}</h2>
+
 <div class="players">
     {% for player in players %}
         <div class="card">
@@ -30,19 +32,19 @@
             <div class="actions">
                 <a href="{{ path('save_presence', {
                     playerId: player.id,
-                    eventId: 1,
+                    eventId: event.id,
                     status: 'present'
                 }) }}">Présence</a>
 
                 <a href="{{ path('save_presence', {
                     playerId: player.id,
-                    eventId: 1,
+                    eventId: event.id,
                     status: 'absent'
                 }) }}">Absent</a>
 
                 <a href="{{ path('save_presence', {
                     playerId: player.id,
-                    eventId: 1,
+                    eventId: event.id,
                     status: 'injured'
                 }) }}">Blessé</a>
             </div>
