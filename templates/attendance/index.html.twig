@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des présence{% endblock %}
+
+{% block body %}
+<h1>Equipe : {{ team.name }}</h1>
+
+<div class="players">
+    {% for player in players %}
+        <div class="card">
+            <img src="{{ player.photo ?? '/default.png' }}" alt="photo joueur">
+
+            <h3>{{ player.firstName }} {{ player.lastName }}</h3>
+
+            {# On cherche la DERNIÈRE présence du joueur #}
+            {% set lastPresence = null %}
+            {% for presence in presences %}
+                {% if presence.player.id == player.id %}
+                    {% set lastPresence = presence.status %}
+                {% endif %}
+            {% endfor %}
+
+            {# Affichage propre (UNE seule valeur) #}
+            {% if lastPresence %}
+                <p>{{ lastPresence }}</p>
+            {% else %}
+                <p>Non renseigné</p>
+            {% endif %}
+
+            <div class="actions">
+                <a href="{{ path('save_presence', {
+                    playerId: player.id,
+                    eventId: 1,
+                    status: 'present'
+                }) }}">Présence</a>
+
+                <a href="{{ path('save_presence', {
+                    playerId: player.id,
+                    eventId: 1,
+                    status: 'absent'
+                }) }}">Absent</a>
+
+                <a href="{{ path('save_presence', {
+                    playerId: player.id,
+                    eventId: 1,
+                    status: 'injured'
+                }) }}">Blessé</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
