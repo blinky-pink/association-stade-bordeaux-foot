@@ -5,6 +5,9 @@
 {% block body %}
 <h1>Les joueurs</h1>
 
+{# Lien pour ajouter un joueur #}
+<a href="{{ path('player_create') }}">+ Ajouter un joueur</a>
+
 <ul>
     {% for player in players %}
         <li>

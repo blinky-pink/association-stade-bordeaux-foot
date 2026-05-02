@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Player;
+use App\Form\PlayerType;
 use App\Repository\PlayerRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -13,7 +17,6 @@ class PlayerController extends AbstractController
     #[Route('/players', name: 'player_list')]
     public function index(PlayerRepository $playerRepository): Response
     {
-        // Récupère tous les joueurs depuis la base
         $players = $playerRepository->findAll();
 
         return $this->render('player/index.html.twig', [
@@ -33,6 +36,34 @@ class PlayerController extends AbstractController
 
         return $this->render('player/show.html.twig', [
             'player' => $player,
+        ]);
+    }
+
+    // Créer un nouveau joueur
+    #[Route('/players/create', name: 'player_create')]
+    public function create(Request $request, EntityManagerInterface $em): Response
+    {
+        // Crée un joueur vide
+        $player = new Player();
+
+        // Crée le formulaire lié au joueur
+        $form = $this->createForm(PlayerType::class, $player);
+
+        // Analyse la requête HTTP (données du formulaire soumis)
+        $form->handleRequest($request);
+
+        // Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Prépare et enregistre en base
+            $em->persist($player);
+            $em->flush();
+
+            // Redirige vers la liste des joueurs
+            return $this->redirectToRoute('player_list');
+        }
+
+        return $this->render('player/create.html.twig', [
+            'form' => $form,
         ]);
     }
 }
