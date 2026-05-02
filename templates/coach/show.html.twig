@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Coach {{ coach.name }}{% endblock %}
+
+{% block body %}
+<h1>Coach : {{ coach.name }}</h1>
+
+{% if coach.licence %}
+    <p>Licence : {{ coach.licence }}</p>
+{% endif %}
+
+<h2>Ses équipes</h2>
+<ul>
+    {% for team in coach.teams %}
+        <li>
+            <a href="{{ path('team_show', {id: team.id}) }}">
+                {{ team.name }}
+            </a>
+        </li>
+    {% else %}
+        <li>Aucune équipe.</li>
+    {% endfor %}
+</ul>
+
+<h2>Ses événements</h2>
+<ul>
+    {% for event in coach.events %}
+        <li>{{ event.title }} — {{ event.eventDate|date('d/m/Y') }}</li>
+    {% else %}
+        <li>Aucun événement.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ path('coach_list') }}">Retour à la liste</a>
+{% endblock %}

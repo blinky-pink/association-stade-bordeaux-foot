@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des coachs{% endblock %}
+
+{% block body %}
+<h1>Les coachs</h1>
+
+<ul>
+    {% for coach in coaches %}
+        <li>
+            <a href="{{ path('coach_show', {id: coach.id}) }}">
+                {{ coach.name }}
+            </a>
+            {% if coach.licence %}
+                — Licence : {{ coach.licence }}
+            {% endif %}
+        </li>
+    {% else %}
+        <li>Aucun coach trouvé.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
