@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ player.firstName }} {{ player.lastName }}{% endblock %}
+
+{% block body %}
+<h1>{{ player.firstName }} {{ player.lastName }}</h1>
+
+<p>Équipe : {{ player.team.name }}</p>
+<p>Date de naissance : {{ player.birthDate|date('d/m/Y') }}</p>
+
+{% if player.phone %}
+    <p>Téléphone : {{ player.phone }}</p>
+{% endif %}
+
+{% if player.position %}
+    <p>Poste : {{ player.position }}</p>
+{% endif %}
+
+{% if player.jerseySize %}
+    <p>Taille maillot : {{ player.jerseySize }}</p>
+{% endif %}
+
+{% if player.shortsSize %}
+    <p>Taille short : {{ player.shortsSize }}</p>
+{% endif %}
+
+{# Responsables du joueur #}
+<h2>Responsables</h2>
+<ul>
+    {% for responsable in player.responsables %}
+        <li>
+            {{ responsable.name }}
+            — Tél : {{ responsable.phone }}
+            {% if responsable.email %}
+                — Email : {{ responsable.email }}
+            {% endif %}
+        </li>
+    {% else %}
+        <li>Aucun responsable enregistré.</li>
+    {% endfor %}
+</ul>
+
+{# Présences du joueur #}
+<h2>Présences</h2>
+<ul>
+    {% for presence in player.presences %}
+        <li>
+            {{ presence.event.title }}
+            — {{ presence.date|date('d/m/Y') }}
+            — {{ presence.status }}
+        </li>
+    {% else %}
+        <li>Aucune présence enregistrée.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ path('player_list') }}">Retour à la liste</a>
+{% endblock %}

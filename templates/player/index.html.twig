@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des joueurs{% endblock %}
+
+{% block body %}
+<h1>Les joueurs</h1>
+
+<ul>
+    {% for player in players %}
+        <li>
+            <a href="{{ path('player_show', {id: player.id}) }}">
+                {{ player.firstName }} {{ player.lastName }}
+            </a>
+            — Équipe : {{ player.team.name }}
+            — Né le : {{ player.birthDate|date('d/m/Y') }}
+        </li>
+    {% else %}
+        <li>Aucun joueur trouvé.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
