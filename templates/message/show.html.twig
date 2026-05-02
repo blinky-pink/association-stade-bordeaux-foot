@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Message : {{ message.title }}{% endblock %}
+
+{% block body %}
+<h1>{{ message.title }}</h1>
+
+<p>Type : {{ message.type }}</p>
+<p>Date d'envoi : {{ message.sendAt|date('d/m/Y') }}</p>
+<p>De : {{ message.coach.name }}</p>
+<p>À : {{ message.player.firstName }} {{ message.player.lastName }}</p>
+
+<h2>Contenu</h2>
+<p>{{ message.content }}</p>
+
+<a href="{{ path('message_list') }}">Retour à la liste</a>
+{% endblock %}

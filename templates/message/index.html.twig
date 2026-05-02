@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des messages{% endblock %}
+
+{% block body %}
+<h1>Les messages</h1>
+
+<ul>
+    {% for message in messages %}
+        <li>
+            <a href="{{ path('message_show', {id: message.id}) }}">
+                {{ message.title }}
+            </a>
+            — {{ message.type }}
+            — {{ message.sendAt|date('d/m/Y') }}
+            — De : {{ message.coach.name }}
+            — À : {{ message.player.firstName }} {{ message.player.lastName }}
+        </li>
+    {% else %}
+        <li>Aucun message trouvé.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
