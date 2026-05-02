@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Responsable : {{ responsable.name }}{% endblock %}
+
+{% block body %}
+<h1>{{ responsable.name }}</h1>
+
+<p>Téléphone : {{ responsable.phone }}</p>
+
+{% if responsable.email %}
+    <p>Email : {{ responsable.email }}</p>
+{% endif %}
+
+<p>
+    Responsable de :
+    {{ responsable.player.firstName }} {{ responsable.player.lastName }}
+</p>
+
+<a href="{{ path('responsable_list') }}">Retour à la liste</a>
+{% endblock %}

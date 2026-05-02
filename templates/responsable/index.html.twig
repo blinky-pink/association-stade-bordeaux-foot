@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des responsables{% endblock %}
+
+{% block body %}
+<h1>Les responsables</h1>
+
+<ul>
+    {% for responsable in responsables %}
+        <li>
+            <a href="{{ path('responsable_show', {id: responsable.id}) }}">
+                {{ responsable.name }}
+            </a>
+            — Joueur : {{ responsable.player.firstName }} {{ responsable.player.lastName }}
+            — Tél : {{ responsable.phone }}
+        </li>
+    {% else %}
+        <li>Aucun responsable trouvé.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
