@@ -16,6 +16,9 @@
             </a>
             — Équipe : {{ player.team.name }}
             — Né le : {{ player.birthDate|date('d/m/Y') }}
+            | <a href="{{ path('player_edit', {id: player.id}) }}">Modifier</a>
+            | <a href="{{ path('player_delete', {id: player.id}) }}"
+                 onclick="return confirm('Supprimer ce joueur ?')">Supprimer</a>
         </li>
     {% else %}
         <li>Aucun joueur trouvé.</li>

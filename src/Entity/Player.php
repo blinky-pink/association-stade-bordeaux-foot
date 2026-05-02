@@ -53,19 +53,19 @@ class Player
     /**
      * @var Collection<int, Responsable>
      */
-    #[ORM\OneToMany(targetEntity: Responsable::class, mappedBy: 'Player')]
+    #[ORM\OneToMany(targetEntity: Responsable::class, mappedBy: 'player')]
     private Collection $responsables;
 
     /**
      * @var Collection<int, Presence>
      */
-    #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'Player')]
+    #[ORM\OneToMany(targetEntity: Presence::class, mappedBy: 'player')]
     private Collection $presences;
 
     /**
      * @var Collection<int, Message>
      */
-    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'Player')]
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'player')]
     private Collection $messages;
 
     public function __construct()

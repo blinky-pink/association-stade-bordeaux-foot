@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier 
+
+{{ player.firstName }} 
+{{ player.lastName }}
+
+{% endblock %}
+
+{% block body %}
+<h1>Modifier : {{ player.firstName }} {{ player.lastName }}</h1>
+
+{{ form(form) }}
+
+<a href="{{ path('player_list') }}">Annuler</a>
+{% endblock %}

@@ -61,7 +61,7 @@ class Presence
         return $this->player;
     }
 
-    public function setPlayer(?player $player): static
+    public function setPlayer(?Player $player): static
     {
         $this->player = $player;
 
@@ -73,7 +73,7 @@ class Presence
         return $this->event;
     }
 
-    public function setEvent(?event $event): static
+    public function setEvent(?Event $event): static
     {
         $this->event = $event;
 

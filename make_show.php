@@ -1,3 +1,5 @@
+<?php 
+$content = <<<TWIG
 {% extends 'base.html.twig' %}
 
 {% block title %}Joueur{% endblock %}
@@ -18,3 +20,7 @@
 
 <a href="{{ path('player_list') }}">Retour a la liste</a>
 {% endblock %}
+TWIG;
+
+file_put_contents('templates/player/show.html.twig', $content);
+echo "OK !";
