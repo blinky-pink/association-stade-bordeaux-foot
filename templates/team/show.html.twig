@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Équipe {{ team.name }}{% endblock %}
+
+{% block body %}
+<h1>Équipe : {{ team.name }}</h1>
+
+{% if team.coach %}
+    <p>Coach : {{ team.coach.name }}</p>
+{% endif %}
+
+<h2>Joueurs</h2>
+<ul>
+    {% for player in team.players %}
+        <li>{{ player.firstName }} {{ player.lastName }}</li>
+    {% else %}
+        <li>Aucun joueur dans cette équipe.</li>
+    {% endfor %}
+</ul>
+
+{# Lien vers la gestion des présences #}
+<a href="{{ path('team_attendance', {id: team.id}) }}">Gérer les présences</a>
+
+<br>
+<a href="{{ path('team_list') }}">Retour à la liste</a>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des équipes{% endblock %}
+
+{% block body %}
+<h1>Les équipes</h1>
+
+<ul>
+    {% for team in teams %}
+        <li>
+            {# Lien vers le détail de l'équipe #}
+            <a href="{{ path('team_show', {id: team.id}) }}">
+                {{ team.name }}
+            </a>
+            {# Affiche le nom du coach si il existe #}
+            {% if team.coach %}
+                — Coach : {{ team.coach.name }}
+            {% endif %}
+        </li>
+    {% else %}
+        <li>Aucune équipe trouvée.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
