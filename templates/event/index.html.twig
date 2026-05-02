@@ -5,6 +5,8 @@
 {% block body %}
 <h1>Les événements</h1>
 
+<a href="{{ path('event_create') }}">+ Ajouter un événement</a>
+
 <ul>
     {% for event in events %}
         <li>
