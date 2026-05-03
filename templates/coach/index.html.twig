@@ -5,6 +5,8 @@
 {% block body %}
 <h1>Les coachs</h1>
 
+<a href="{{ path('coach_create') }}">+ Ajouter un coach</a>
+
 <ul>
     {% for coach in coaches %}
         <li>
@@ -12,11 +14,14 @@
                 {{ coach.name }}
             </a>
             {% if coach.licence %}
-                — Licence : {{ coach.licence }}
+                - Licence : {{ coach.licence }}
             {% endif %}
+            | <a href="{{ path('coach_edit', {id: coach.id}) }}">Modifier</a>
+            | <a href="{{ path('coach_delete', {id: coach.id}) }}"
+                onclick="return confirm('Supprimer ce coach ?')">Supprimer</a>
         </li>
     {% else %}
-        <li>Aucun coach trouvé.</li>
+        <li>Aucun coach trouve.</li>
     {% endfor %}
 </ul>
 {% endblock %}

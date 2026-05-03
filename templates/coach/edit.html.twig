@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ coach.name }}{% endblock %}
+
+{% block body %}
+<h1>Modifier : {{ coach.name }}</h1>
+
+{{ form(form) }}
+
+<a href="{{ path('coach_list') }}">Annuler</a>
+{% endblock %}

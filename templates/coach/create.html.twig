@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau coach{% endblock %}
+
+{% block body %}
+<h1>Ajouter un coach</h1>
+
+{{ form(form) }}
+
+<a href="{{ path('coach_list') }}">Annuler</a>
+{% endblock %}
