@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Stade Bordeaux{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}"> 
 
         {% block stylesheets %}
         {% endblock %}
@@ -12,6 +13,11 @@
         {% endblock %}
     </head>
     <body>
+
+        {# Header avec logo #}
+        <header>
+            <img src="{{ asset('logo.jpg') }}" alt="Logo Stade Bordeaux">
+        </header>
 
         {# Menu de navigation principal #}
         <nav>

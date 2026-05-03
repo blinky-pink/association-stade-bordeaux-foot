@@ -1,0 +1,140 @@
+/* Reset */
+* {
+    box-sizing: border-box;
+}
+
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    background-color: white;
+    padding: 5px 20px;
+    border-bottom: 3px solid #7a0000;
+    text-align: center;
+}
+
+header img {
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Navigation */
+nav {
+    background-color: #333;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    color: #f0c040;
+}
+
+/* Contenu principal centré */
+main {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 40px;
+}
+
+/* Titres */
+h1 {
+    color: #7a0000;
+    border-bottom: 2px solid #7a0000;
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Liens */
+a {
+    color: #7a0000;
+}
+
+a:hover {
+    color: #333;
+}
+
+/* Listes */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    padding: 10px 0;
+    border-bottom:none;
+}
+
+/* Formulaires */
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+button, input[type="submit"] {
+    background-color: #7a0000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #333;
+}
+
+/* Responsive mobile */
+@media (max-width: 768px) {
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        padding: 10px;
+    }
+
+    nav a {
+        font-size: 14px;
+        margin: 3px;
+    }
+
+    main {
+        padding: 0 15px;
+        margin: 15px auto;
+    }
+
+    header img {
+        height: 60px;
+    }
+}
