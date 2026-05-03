@@ -5,17 +5,20 @@
 {% block body %}
 <h1>Les équipes</h1>
 
+<a href="{{ path('team_create') }}">+ Ajouter une équipe</a>
+
 <ul>
     {% for team in teams %}
         <li>
-            {# Lien vers le détail de l'équipe #}
             <a href="{{ path('team_show', {id: team.id}) }}">
                 {{ team.name }}
             </a>
-            {# Affiche le nom du coach si il existe #}
             {% if team.coach %}
-                — Coach : {{ team.coach.name }}
+                - Coach : {{ team.coach.name }}
             {% endif %}
+            | <a href="{{ path('team_edit', {id: team.id}) }}">Modifier</a>
+            | <a href="{{ path('team_delete', {id: team.id}) }}"
+                onclick="return confirm('Supprimer cette équipe ?')">Supprimer</a>
         </li>
     {% else %}
         <li>Aucune équipe trouvée.</li>
