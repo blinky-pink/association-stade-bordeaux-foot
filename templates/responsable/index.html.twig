@@ -5,17 +5,22 @@
 {% block body %}
 <h1>Les responsables</h1>
 
+<a href="{{ path('responsable_create') }}">+ Ajouter un responsable</a>
+
 <ul>
     {% for responsable in responsables %}
         <li>
             <a href="{{ path('responsable_show', {id: responsable.id}) }}">
                 {{ responsable.name }}
             </a>
-            — Joueur : {{ responsable.player.firstName }} {{ responsable.player.lastName }}
-            — Tél : {{ responsable.phone }}
+            - Joueur : {{ responsable.player.firstName }} {{ responsable.player.lastName }}
+            - Tel : {{ responsable.phone }}
+            | <a href="{{ path('responsable_edit', {id: responsable.id}) }}">Modifier</a>
+            | <a href="{{ path('responsable_delete', {id: responsable.id}) }}"
+                onclick="return confirm('Supprimer ce responsable ?')">Supprimer</a>
         </li>
     {% else %}
-        <li>Aucun responsable trouvé.</li>
+        <li>Aucun responsable trouve.</li>
     {% endfor %}
 </ul>
 {% endblock %}

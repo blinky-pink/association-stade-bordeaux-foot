@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ responsable.name }}{% endblock %}
+
+{% block body %}
+<h1>Modifier : {{ responsable.name }}</h1>
+
+{{ form(form) }}
+
+<a href="{{ path('responsable_list') }}">Annuler</a>
+{% endblock %}

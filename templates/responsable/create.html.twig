@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau responsable{% endblock %}
+
+{% block body %}
+<h1>Ajouter un responsable</h1>
+
+{{ form(form) }}
+
+<a href="{{ path('responsable_list') }}">Annuler</a>
+{% endblock %}
