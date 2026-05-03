@@ -5,19 +5,24 @@
 {% block body %}
 <h1>Les messages</h1>
 
+<a href="{{ path('message_create') }}">+ Ajouter un message</a>
+
 <ul>
     {% for message in messages %}
         <li>
             <a href="{{ path('message_show', {id: message.id}) }}">
                 {{ message.title }}
             </a>
-            — {{ message.type }}
-            — {{ message.sendAt|date('d/m/Y') }}
-            — De : {{ message.coach.name }}
-            — À : {{ message.player.firstName }} {{ message.player.lastName }}
+            - {{ message.type }}
+            - {{ message.sendAt|date('d/m/Y') }}
+            - De : {{ message.coach.name }}
+            - A : {{ message.player.firstName }} {{ message.player.lastName }}
+            | <a href="{{ path('message_edit', {id: message.id}) }}">Modifier</a>
+            | <a href="{{ path('message_delete', {id: message.id}) }}"
+                onclick="return confirm('Supprimer ce message ?')">Supprimer</a>
         </li>
     {% else %}
-        <li>Aucun message trouvé.</li>
+        <li>Aucun message trouve.</li>
     {% endfor %}
 </ul>
 {% endblock %}
