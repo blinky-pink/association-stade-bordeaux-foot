@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard - Stade Bordeaux{% endblock %}
+
+{% block body %}
+<h1>Bienvenue sur Stade Bordeaux</h1>
+
+<h2>Résumé</h2>
+<ul>
+    <li><a href="{{ path('team_list') }}">{{ nbTeams }} équipe(s)</a></li>
+    <li><a href="{{ path('player_list') }}">{{ nbPlayers }} joueur(s)</a></li>
+    <li><a href="{{ path('event_list') }}">{{ nbEvents }} événement(s)</a></li>
+    <li><a href="{{ path('message_list') }}">{{ nbMessages }} message(s)</a></li>
+</ul>
+
+<h2>Derniers événements</h2>
+<ul>
+    {% for event in lastEvents %}
+        <li>
+            <a href="{{ path('event_show', {id: event.id}) }}">
+                {{ event.title }}
+            </a>
+            - {{ event.type }}
+            - {{ event.eventDate|date('d/m/Y') }}
+        </li>
+    {% else %}
+        <li>Aucun événement.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
