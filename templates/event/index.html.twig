@@ -13,9 +13,12 @@
             <a href="{{ path('event_show', {id: event.id}) }}">
                 {{ event.title }}
             </a>
-            — {{ event.type }}
-            — {{ event.eventDate|date('d/m/Y') }}
-            — Coach : {{ event.coach.name }}
+            - {{ event.type }}
+            - {{ event.eventDate|date('d/m/Y') }}
+            - Coach : {{ event.coach.name }}
+            | <a href="{{ path('event_edit', {id: event.id}) }}">Modifier</a>
+            | <a href="{{ path('event_delete', {id: event.id}) }}"
+                onclick="return confirm('Supprimer cet événement ?')">Supprimer</a>
         </li>
     {% else %}
         <li>Aucun événement trouvé.</li>

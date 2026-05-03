@@ -11,7 +11,7 @@
 
 <h2>Joueurs</h2>
 <ul>
-    {% for player in team.players %}
+    {% for player in team.getPlayers() %}
         <li>{{ player.firstName }} {{ player.lastName }}</li>
     {% else %}
         <li>Aucun joueur dans cette équipe.</li>
@@ -19,7 +19,7 @@
 </ul>
 
 {# Lien vers la gestion des présences #}
-<a href="{{ path('team_attendance', {id: team.id}) }}">Gérer les présences</a>
+<a href="{{ path('team_attendance', {id: team.id, eventId: 1}) }}">Gérer les présences</a>
 
 <br>
 <a href="{{ path('team_list') }}">Retour à la liste</a>

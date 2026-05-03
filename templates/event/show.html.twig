@@ -15,9 +15,9 @@
 
 <h2>Présences</h2>
 <ul>
-    {% for presence in event.presences %}
+    {% for presence in event.getPresences() %}
         <li>
-            {{ presence.player.firstName }} {{ presence.player.lastName }}
+            {{ presence.getPlayer().getFirstName() }} {{ presence.getPlayer().getLastName() }}
             — {{ presence.status }}
         </li>
     {% else %}

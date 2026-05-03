@@ -11,7 +11,7 @@
 
 <h2>Ses équipes</h2>
 <ul>
-    {% for team in coach.teams %}
+    {% for team in coach.getTeams() %}
         <li>
             <a href="{{ path('team_show', {id: team.id}) }}">
                 {{ team.name }}
@@ -24,7 +24,7 @@
 
 <h2>Ses événements</h2>
 <ul>
-    {% for event in coach.events %}
+    {% for event in coach.getEvents() %}
         <li>{{ event.title }} — {{ event.eventDate|date('d/m/Y') }}</li>
     {% else %}
         <li>Aucun événement.</li>

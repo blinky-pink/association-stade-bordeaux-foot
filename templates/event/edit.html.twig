@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ event.title }}{% endblock %}
+
+{% block body %}
+<h1>Modifier : {{ event.title }}</h1>
+
+{{ form(form) }}
+
+<a href="{{ path('event_list') }}">Annuler</a>
+{% endblock %}

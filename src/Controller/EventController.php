@@ -44,7 +44,6 @@ class EventController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $event = new Event();
-
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
@@ -58,5 +57,51 @@ class EventController extends AbstractController
         return $this->render('event/create.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    // Modifier un événement existant
+    #[Route('/events/edit/{id}', name: 'event_edit')]
+    public function edit(int $id, Request $request, EventRepository $eventRepository, EntityManagerInterface $em): Response
+    {
+        $event = $eventRepository->find($id);
+
+        if (!$event) {
+            throw $this->createNotFoundException('Événement introuvable');
+        }
+
+        $form = $this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->redirectToRoute('event_list');
+        }
+
+        return $this->render('event/edit.html.twig', [
+            'form' => $form,
+            'event' => $event,
+        ]);
+    }
+
+    // Supprimer un événement
+    #[Route('/events/delete/{id}', name: 'event_delete')]
+    public function delete(int $id, EventRepository $eventRepository, EntityManagerInterface $em): Response
+    {
+        $event = $eventRepository->find($id);
+
+        if (!$event) {
+            throw $this->createNotFoundException('Événement introuvable');
+        }
+
+        // Supprime d'abord les présences liées à l'événement
+        foreach ($event->getPresences() as $presence) {
+            $em->remove($presence);
+        }
+
+        $em->remove($event);
+        $em->flush();
+
+        return $this->redirectToRoute('event_list');
     }
 }
