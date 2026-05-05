@@ -27,7 +27,11 @@
 }
 
 body {
-    font-family: 'Source Sans 3', Arial, sans-serif;
+    background-image: url('../terrain.avif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     background-color: #f0eeec;
     color: var(--dark);
     min-height: 100vh;
@@ -137,11 +141,11 @@ hr {
    CONTENU PRINCIPAL
    ============================================= */
 main {
-    max-width: 980px;
-    width: 100%;
-    margin: 36px auto;
-    padding: 0 30px;
-    flex: 1;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px 40px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 8px;
 }
 
 /* =============================================
@@ -204,13 +208,12 @@ ul {
 
 ul li {
     padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
     transition: background var(--transition);
     border-radius: 4px;
 }
 
 ul li:hover {
-    background: rgba(122,0,0,0.05);
+    background: rgba(122,0,0,0.15);
 }
 
 ul li a {
