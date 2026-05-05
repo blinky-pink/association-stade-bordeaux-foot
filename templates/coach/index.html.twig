@@ -5,23 +5,31 @@
 {% block body %}
 <h1>Les coachs</h1>
 
-<a href="{{ path('coach_create') }}">+ Ajouter un coach</a>
+<div class="actions-bar">
+    <a href="{{ path('coach_create') }}" class="btn btn-primary">+ Ajouter un coach</a>
+</div>
 
-<ul>
-    {% for coach in coaches %}
-        <li>
-            <a href="{{ path('coach_show', {id: coach.id}) }}">
-                {{ coach.name }}
-            </a>
-            {% if coach.licence %}
-                - Licence : {{ coach.licence }}
-            {% endif %}
-            | <a href="{{ path('coach_edit', {id: coach.id}) }}">Modifier</a>
-            | <a href="{{ path('coach_delete', {id: coach.id}) }}"
-                onclick="return confirm('Supprimer ce coach ?')">Supprimer</a>
-        </li>
-    {% else %}
-        <li>Aucun coach trouve.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Licence</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for coach in coaches %}
+        <tr>
+            <td><a href="{{ path('coach_show', {id: coach.id}) }}"><strong>{{ coach.name }}</strong></a></td>
+            <td>{% if coach.licence %}<span class="event-badge">{{ coach.licence }}</span>{% else %}<span class="muted">—</span>{% endif %}</td>
+            <td class="td-actions">
+                <a href="{{ path('coach_edit', {id: coach.id}) }}" class="btn btn-secondary">Modifier</a>
+                <a href="{{ path('coach_delete', {id: coach.id}) }}" class="btn btn-delete" onclick="return confirm('Supprimer ce coach ?')">Supprimer</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" class="td-empty">Aucun coach trouvé.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

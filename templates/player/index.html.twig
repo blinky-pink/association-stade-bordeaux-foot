@@ -5,23 +5,33 @@
 {% block body %}
 <h1>Les joueurs</h1>
 
-{# Lien pour ajouter un joueur #}
-<a href="{{ path('player_create') }}">+ Ajouter un joueur</a>
+<div class="actions-bar">
+    <a href="{{ path('player_create') }}" class="btn btn-primary">+ Ajouter un joueur</a>
+</div>
 
-<ul>
-    {% for player in players %}
-        <li>
-            <a href="{{ path('player_show', {id: player.id}) }}">
-                {{ player.firstName }} {{ player.lastName }}
-            </a>
-            — Équipe : {{ player.team.name }}
-            — Né le : {{ player.birthDate|date('d/m/Y') }}
-            | <a href="{{ path('player_edit', {id: player.id}) }}">Modifier</a>
-            | <a href="{{ path('player_delete', {id: player.id}) }}"
-                 onclick="return confirm('Supprimer ce joueur ?')">Supprimer</a>
-        </li>
-    {% else %}
-        <li>Aucun joueur trouvé.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Équipe</th>
+            <th>Date de naissance</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+        <tr>
+            <td><a href="{{ path('player_show', {id: player.id}) }}"><strong>{{ player.firstName }} {{ player.lastName }}</strong></a></td>
+            <td>{{ player.team.name }}</td>
+            <td>{{ player.birthDate|date('d/m/Y') }}</td>
+            <td class="td-actions">
+                <a href="{{ path('player_edit', {id: player.id}) }}" class="btn btn-secondary">Modifier</a>
+                <a href="{{ path('player_delete', {id: player.id}) }}" class="btn btn-delete" onclick="return confirm('Supprimer ce joueur ?')">Supprimer</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="td-empty">Aucun joueur trouvé.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

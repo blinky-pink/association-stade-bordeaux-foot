@@ -5,23 +5,31 @@
 {% block body %}
 <h1>Les équipes</h1>
 
-<a href="{{ path('team_create') }}">+ Ajouter une équipe</a>
+<div class="actions-bar">
+    <a href="{{ path('team_create') }}" class="btn btn-primary">+ Ajouter une équipe</a>
+</div>
 
-<ul>
-    {% for team in teams %}
-        <li>
-            <a href="{{ path('team_show', {id: team.id}) }}">
-                {{ team.name }}
-            </a>
-            {% if team.coach %}
-                - Coach : {{ team.coach.name }}
-            {% endif %}
-            | <a href="{{ path('team_edit', {id: team.id}) }}">Modifier</a>
-            | <a href="{{ path('team_delete', {id: team.id}) }}"
-                onclick="return confirm('Supprimer cette équipe ?')">Supprimer</a>
-        </li>
-    {% else %}
-        <li>Aucune équipe trouvée.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Équipe</th>
+            <th>Coach</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for team in teams %}
+        <tr>
+            <td><a href="{{ path('team_show', {id: team.id}) }}"><strong>{{ team.name }}</strong></a></td>
+            <td>{% if team.coach %}{{ team.coach.name }}{% else %}<span class="muted">—</span>{% endif %}</td>
+            <td class="td-actions">
+                <a href="{{ path('team_edit', {id: team.id}) }}" class="btn btn-secondary">Modifier</a>
+                <a href="{{ path('team_delete', {id: team.id}) }}" class="btn btn-delete" onclick="return confirm('Supprimer cette équipe ?')">Supprimer</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="3" class="td-empty">Aucune équipe trouvée.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

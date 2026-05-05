@@ -5,24 +5,37 @@
 {% block body %}
 <h1>Les messages</h1>
 
-<a href="{{ path('message_create') }}">+ Ajouter un message</a>
+<div class="actions-bar">
+    <a href="{{ path('message_create') }}" class="btn btn-primary">+ Ajouter un message</a>
+</div>
 
-<ul>
-    {% for message in messages %}
-        <li>
-            <a href="{{ path('message_show', {id: message.id}) }}">
-                {{ message.title }}
-            </a>
-            - {{ message.type }}
-            - {{ message.sendAt|date('d/m/Y') }}
-            - De : {{ message.coach.name }}
-            - A : {{ message.player.firstName }} {{ message.player.lastName }}
-            | <a href="{{ path('message_edit', {id: message.id}) }}">Modifier</a>
-            | <a href="{{ path('message_delete', {id: message.id}) }}"
-                onclick="return confirm('Supprimer ce message ?')">Supprimer</a>
-        </li>
-    {% else %}
-        <li>Aucun message trouve.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>De</th>
+            <th>À</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for message in messages %}
+        <tr>
+            <td><a href="{{ path('message_show', {id: message.id}) }}"><strong>{{ message.title }}</strong></a></td>
+            <td><span class="event-badge">{{ message.type }}</span></td>
+            <td>{{ message.sendAt|date('d/m/Y') }}</td>
+            <td>{{ message.coach.name }}</td>
+            <td>{{ message.player.firstName }} {{ message.player.lastName }}</td>
+            <td class="td-actions">
+                <a href="{{ path('message_edit', {id: message.id}) }}" class="btn btn-secondary">Modifier</a>
+                <a href="{{ path('message_delete', {id: message.id}) }}" class="btn btn-delete" onclick="return confirm('Supprimer ce message ?')">Supprimer</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="6" class="td-empty">Aucun message trouvé.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

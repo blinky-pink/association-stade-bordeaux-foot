@@ -27,6 +27,7 @@
 }
 
 body {
+    font-family: 'Source Sans 3', Arial, sans-serif;
     background-image: url('../terrain.avif');
     background-size: cover;
     background-position: center;
@@ -44,29 +45,16 @@ body {
    ============================================= */
 header {
     background-color: white;
-    padding: 5px 20px;
-    border-bottom: 3px solid #7a0000;
+    padding: 10px;
+    border-bottom: 3px solid #ffffff;
     text-align: center;
-}
-
-header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 18px,
-        rgba(255,255,255,0.03) 18px,
-        rgba(255,255,255,0.03) 36px
-    );
-    pointer-events: none;
+    
+   
 }
 
 header img {
-    height: 100px;
-    object-fit: contain;
-   
+    height: 80px;
+    
 }
 
 header .header-title {
@@ -141,6 +129,7 @@ hr {
    CONTENU PRINCIPAL
    ============================================= */
 main {
+    flex: 1;
     max-width: 900px;
     margin: 30px auto;
     padding: 30px 40px;
@@ -208,12 +197,13 @@ ul {
 
 ul li {
     padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
     transition: background var(--transition);
     border-radius: 4px;
 }
 
 ul li:hover {
-    background: rgba(122,0,0,0.15);
+    background: rgba(122,0,0,0.05);
 }
 
 ul li a {
@@ -504,11 +494,48 @@ button:hover, input[type="submit"]:hover {
 }
 
 /* =============================================
+   UTILITAIRES
+   ============================================= */
+.text-right   { text-align: right; }
+.text-center  { text-align: center; }
+.mb-18        { margin-bottom: 18px; }
+.no-wrap      { white-space: nowrap; }
+.muted        { color: #aaa; }
+
+.td-actions {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.td-empty {
+    text-align: center;
+    color: #aaa;
+    padding: 30px !important;
+}
+
+.btn-delete {
+    background: #c0392b;
+    color: white;
+}
+.btn-delete:hover {
+    background: #922b21;
+    color: white;
+    text-decoration: none;
+}
+
+.actions-bar {
+    text-align: right;
+    margin-bottom: 18px;
+}
+
+/* =============================================
    BOUTONS UTILITAIRES
    ============================================= */
 .btn {
     display: inline-block;
     padding: 8px 18px;
+    min-width: 110px;
+    text-align: center;
     border-radius: var(--radius);
     font-family: 'Oswald', sans-serif;
     font-size: 0.88rem;
@@ -532,12 +559,23 @@ button:hover, input[type="submit"]:hover {
 }
 
 .btn-secondary {
-    background: transparent;
-    color: var(--bordeaux);
-    border-color: var(--bordeaux);
+    background: #666;
+    color: var(--white);
+    border-color: #666;
 }
 .btn-secondary:hover {
-    background: var(--bordeaux);
+    background: #444;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.btn-delete {
+    background: #444;
+    color: var(--white);
+    border-color: #444;
+}
+.btn-delete:hover {
+    background: #222;
     color: var(--white);
     text-decoration: none;
 }

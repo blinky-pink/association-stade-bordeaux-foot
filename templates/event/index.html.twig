@@ -5,23 +5,35 @@
 {% block body %}
 <h1>Les événements</h1>
 
-<a href="{{ path('event_create') }}">+ Ajouter un événement</a>
+<div class="actions-bar">
+    <a href="{{ path('event_create') }}" class="btn btn-primary">+ Ajouter un événement</a>
+</div>
 
-<ul>
-    {% for event in events %}
-        <li>
-            <a href="{{ path('event_show', {id: event.id}) }}">
-                {{ event.title }}
-            </a>
-            - {{ event.type }}
-            - {{ event.eventDate|date('d/m/Y') }}
-            - Coach : {{ event.coach.name }}
-            | <a href="{{ path('event_edit', {id: event.id}) }}">Modifier</a>
-            | <a href="{{ path('event_delete', {id: event.id}) }}"
-                onclick="return confirm('Supprimer cet événement ?')">Supprimer</a>
-        </li>
-    {% else %}
-        <li>Aucun événement trouvé.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Coach</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events %}
+        <tr>
+            <td><a href="{{ path('event_show', {id: event.id}) }}"><strong>{{ event.title }}</strong></a></td>
+            <td><span class="event-badge">{{ event.type }}</span></td>
+            <td>{{ event.eventDate|date('d/m/Y') }}</td>
+            <td>{{ event.coach.name }}</td>
+            <td class="td-actions">
+                <a href="{{ path('event_edit', {id: event.id}) }}" class="btn btn-secondary">Modifier</a>
+                <a href="{{ path('event_delete', {id: event.id}) }}" class="btn btn-delete" onclick="return confirm('Supprimer cet événement ?')">Supprimer</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="td-empty">Aucun événement trouvé.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
