@@ -193,7 +193,6 @@ ul {
 
 ul li {
     padding: 10px 14px;
-    border-bottom: 1px solid var(--border);
     transition: background var(--transition);
     border-radius: 4px;
 }
