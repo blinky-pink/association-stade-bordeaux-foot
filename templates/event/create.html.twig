@@ -5,7 +5,10 @@
 {% block body %}
 <h1>Ajouter un événement</h1>
 
-{{ form(form) }}
-
-<a href="{{ path('event_list') }}">Annuler</a>
+<div class="form-wrapper">
+    {{ form(form) }}
+    <div class="show-actions">
+        <a href="{{ path('event_list') }}" class="btn btn-secondary">Annuler</a>
+    </div>
+</div>
 {% endblock %}

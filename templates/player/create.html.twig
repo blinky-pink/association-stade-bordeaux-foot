@@ -5,8 +5,10 @@
 {% block body %}
 <h1>Ajouter un joueur</h1>
 
-{# Affiche le formulaire #}
-{{ form(form) }}
-
-<a href="{{ path('player_list') }}">Annuler</a>
+<div class="form-wrapper">
+    {{ form(form) }}
+    <div class="show-actions">
+        <a href="{{ path('player_list') }}" class="btn btn-secondary">Annuler</a>
+    </div>
+</div>
 {% endblock %}

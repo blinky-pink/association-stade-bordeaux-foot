@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier 
-
-{{ player.firstName }} 
-{{ player.lastName }}
-
-{% endblock %}
+{% block title %}Modifier le joueur{% endblock %}
 
 {% block body %}
 <h1>Modifier : {{ player.firstName }} {{ player.lastName }}</h1>
 
-{{ form(form) }}
-
-<a href="{{ path('player_list') }}">Annuler</a>
+<div class="form-wrapper">
+    {{ form(form) }}
+    <div class="show-actions">
+        <a href="{{ path('player_list') }}" class="btn btn-secondary">Annuler</a>
+    </div>
+</div>
 {% endblock %}
