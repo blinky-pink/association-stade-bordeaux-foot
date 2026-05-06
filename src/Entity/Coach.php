@@ -96,7 +96,7 @@ class Coach
     public function removeTeam(Team $team): static
     {
         if ($this->teams->removeElement($team)) {
-            // set the owning side to null (unless already changed)
+            // définir le côté propriétaire à null (sauf s’il a déjà été modifié)
             if ($team->getCoach() === $this) {
                 $team->setCoach(null);
             }
@@ -126,7 +126,7 @@ class Coach
     public function removeEvent(Event $event): static
     {
         if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
+            // définir le côté propriétaire à null (sauf s’il a déjà été modifié)
             if ($event->getCoach() === $this) {
                 $event->setCoach(null);
             }
@@ -156,7 +156,7 @@ class Coach
     public function removeMessage(Message $message): static
     {
         if ($this->messages->removeElement($message)) {
-            // set the owning side to null (unless already changed)
+            // définir le côté propriétaire à null (sauf s’il a déjà été modifié)
             if ($message->getCoach() === $this) {
                 $message->setCoach(null);
             }
