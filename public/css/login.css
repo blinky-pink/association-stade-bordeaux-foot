@@ -1,0 +1,126 @@
+/* =============================================
+   LOGIN PAGE
+   ============================================= */
+
+.login-body {
+    background-image: url('../terrain.avif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Source Sans 3', Arial, sans-serif;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border-top: 5px solid #7a0000;
+}
+
+.login-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-logo img {
+    height: 100px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.login-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #7a0000;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.login-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.88rem;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.97rem;
+    transition: border-color 0.2s;
+    background: #fafafa;
+    margin: 0;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #7a0000;
+    box-shadow: 0 0 0 3px rgba(122,0,0,0.10);
+    background: white;
+}
+
+.login-remember {
+    margin: 14px 0 20px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.login-remember input {
+    margin-right: 6px;
+    width: auto;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 13px;
+    background: #7a0000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 0;
+}
+
+.login-btn:hover {
+    background: #550000;
+    transform: translateY(-1px);
+}
