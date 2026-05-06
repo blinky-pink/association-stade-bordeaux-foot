@@ -6,21 +6,33 @@
 <h1>Équipe : {{ team.name }}</h1>
 
 {% if team.coach %}
-    <p>Coach : {{ team.coach.name }}</p>
+<div class="show-info">
+    <p><strong>Coach :</strong> {{ team.coach.name }}</p>
+</div>
 {% endif %}
 
 <h2>Joueurs</h2>
-<ul>
-    {% for player in team.getPlayers() %}
-        <li>{{ player.firstName }} {{ player.lastName }}</li>
-    {% else %}
-        <li>Aucun joueur dans cette équipe.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in team.getPlayers() %}
+        <tr>
+            <td>{{ player.firstName }}</td>
+            <td>{{ player.lastName }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="2" class="td-empty">Aucun joueur dans cette équipe.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-{# Lien vers la gestion des présences #}
-<a href="{{ path('team_attendance', {id: team.id, eventId: 1}) }}">Gérer les présences</a>
-
-<br>
-<a href="{{ path('team_list') }}">Retour à la liste</a>
+<div class="show-actions">
+    <a href="{{ path('team_attendance', {id: team.id, eventId: 1}) }}" class="btn btn-primary">Gérer les présences</a>
+    <a href="{{ path('team_list') }}" class="btn btn-secondary">Retour à la liste</a>
+</div>
 {% endblock %}

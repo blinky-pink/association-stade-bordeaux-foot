@@ -4,17 +4,33 @@
 
 {% block body %}
 <h1>{{ player.firstName }} {{ player.lastName }}</h1>
-<p>Equipe : {{ player.team.name }}</p>
-<p>Naissance : {{ player.birthDate|date('d/m/Y') }}</p>
 
-<h2>Presences</h2>
-<ul>
-{% for presence in player.getPresences() %}
-    <li>{{ presence.getEvent().getTitle() }} - {{ presence.date|date('d/m/Y') }} - {{ presence.status }}</li>
-{% else %}
-    <li>Aucune presence.</li>
-{% endfor %}
-</ul>
+<div class="show-info">
+    <p><strong>Équipe :</strong> {{ player.team.name }}</p>
+    <p><strong>Naissance :</strong> {{ player.birthDate|date('d/m/Y') }}</p>
+</div>
 
-<a href="{{ path('player_list') }}">Retour a la liste</a>
+<h2>Présences</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Événement</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for presence in player.getPresences() %}
+        <tr>
+            <td>{{ presence.getEvent().getTitle() }}</td>
+            <td><span class="event-badge">{{ presence.status }}</span></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="2" class="td-empty">Aucune présence.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="show-actions">
+    <a href="{{ path('player_list') }}" class="btn btn-secondary">Retour à la liste</a>
+</div>
 {% endblock %}

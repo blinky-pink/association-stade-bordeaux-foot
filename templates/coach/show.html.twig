@@ -5,31 +5,51 @@
 {% block body %}
 <h1>Coach : {{ coach.name }}</h1>
 
-{% if coach.licence %}
-    <p>Licence : {{ coach.licence }}</p>
-{% endif %}
+<div class="show-info">
+    {% if coach.licence %}
+    <p><strong>Licence :</strong> {{ coach.licence }}</p>
+    {% endif %}
+</div>
 
 <h2>Ses équipes</h2>
-<ul>
-    {% for team in coach.getTeams() %}
-        <li>
-            <a href="{{ path('team_show', {id: team.id}) }}">
-                {{ team.name }}
-            </a>
-        </li>
-    {% else %}
-        <li>Aucune équipe.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Équipe</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for team in coach.getTeams() %}
+        <tr>
+            <td><a href="{{ path('team_show', {id: team.id}) }}">{{ team.name }}</a></td>
+        </tr>
+        {% else %}
+        <tr><td class="td-empty">Aucune équipe.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 <h2>Ses événements</h2>
-<ul>
-    {% for event in coach.getEvents() %}
-        <li>{{ event.title }} — {{ event.eventDate|date('d/m/Y') }}</li>
-    {% else %}
-        <li>Aucun événement.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in coach.getEvents() %}
+        <tr>
+            <td>{{ event.title }}</td>
+            <td>{{ event.eventDate|date('d/m/Y') }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="2" class="td-empty">Aucun événement.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-<a href="{{ path('coach_list') }}">Retour à la liste</a>
+<div class="show-actions">
+    <a href="{{ path('coach_list') }}" class="btn btn-secondary">Retour à la liste</a>
+</div>
 {% endblock %}

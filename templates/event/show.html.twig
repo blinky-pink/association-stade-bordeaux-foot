@@ -5,25 +5,36 @@
 {% block body %}
 <h1>{{ event.title }}</h1>
 
-<p>Type : {{ event.type }}</p>
-<p>Date : {{ event.eventDate|date('d/m/Y') }}</p>
-<p>Coach : {{ event.coach.name }}</p>
-
-{% if event.description %}
-    <p>Description : {{ event.description }}</p>
-{% endif %}
+<div class="show-info">
+    <p><strong>Type :</strong> <span class="event-badge">{{ event.type }}</span></p>
+    <p><strong>Date :</strong> {{ event.eventDate|date('d/m/Y') }}</p>
+    <p><strong>Coach :</strong> {{ event.coach.name }}</p>
+    {% if event.description %}
+    <p><strong>Description :</strong> {{ event.description }}</p>
+    {% endif %}
+</div>
 
 <h2>Présences</h2>
-<ul>
-    {% for presence in event.getPresences() %}
-        <li>
-            {{ presence.getPlayer().getFirstName() }} {{ presence.getPlayer().getLastName() }}
-            — {{ presence.status }}
-        </li>
-    {% else %}
-        <li>Aucune présence enregistrée.</li>
-    {% endfor %}
-</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Joueur</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for presence in event.getPresences() %}
+        <tr>
+            <td>{{ presence.getPlayer().getFirstName() }} {{ presence.getPlayer().getLastName() }}</td>
+            <td><span class="event-badge">{{ presence.status }}</span></td>
+        </tr>
+        {% else %}
+        <tr><td colspan="2" class="td-empty">Aucune présence enregistrée.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-<a href="{{ path('event_list') }}">Retour à la liste</a>
+<div class="show-actions">
+    <a href="{{ path('event_list') }}" class="btn btn-secondary">Retour à la liste</a>
+</div>
 {% endblock %}
