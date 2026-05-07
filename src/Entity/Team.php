@@ -19,17 +19,17 @@ class Team
     private ?string $Name = null;
 
     #[ORM\ManyToOne(inversedBy: 'teams')]
-    private ?Coach $Coach = null;
+    private ?Coach $coach = null;
 
     /**
      * @var Collection<int, Player>
      */
-    #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'Team')]
-    private Collection $Players;
+    #[ORM\OneToMany(targetEntity: Player::class, mappedBy: 'team')]
+    private Collection $players;
 
     public function __construct()
     {
-        $this->Players = new ArrayCollection();
+        $this->players = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -51,12 +51,12 @@ class Team
 
     public function getCoach(): ?Coach
     {
-        return $this->Coach;
+        return $this->coach;
     }
 
-    public function setCoach(?Coach $Coach): static
+    public function setCoach(?Coach $coach): static
     {
-        $this->Coach = $Coach;
+        $this->coach = $coach;
 
         return $this;
     }
@@ -66,13 +66,13 @@ class Team
      */
     public function getPlayers(): Collection
     {
-        return $this->Players;
+        return $this->players;
     }
 
     public function addPlayer(Player $player): static
     {
-        if (!$this->Players->contains($player)) {
-            $this->Players->add($player);
+        if (!$this->players->contains($player)) {
+            $this->players->add($player);
             $player->setTeam($this);
         }
 
@@ -81,7 +81,7 @@ class Team
 
     public function removePlayer(Player $player): static
     {
-        if ($this->Players->removeElement($player)) {
+        if ($this->players->removeElement($player)) {
             // set the owning side to null (unless already changed)
             if ($player->getTeam() === $this) {
                 $player->setTeam(null);

@@ -1,0 +1,98 @@
+/* ====  Header  ====*/
+
+header {
+    background-color: white;
+        border-bottom: 3px solid #7a0000;
+        text-align: center;
+}
+
+header img {
+    height: 100px;
+}
+
+header .header-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    position: relative;
+}
+
+header .header-title span {
+    color: var(--gold);
+}
+
+/* ==== NAVIGATION ==== */
+nav {
+    background-color: var(--dark);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 2px solid var(--bordeaux);
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 14px 16px;
+    display: inline-block;
+    transition: color var(--transition), background var(--transition);
+    border-bottom: 3px solid transparent;
+    position: relative;
+}
+
+nav a:hover,
+nav a.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+    background: rgba(255,255,255,0.04);
+}
+
+nav a strong {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Supprime le séparateur | entre les liens */
+nav .sep {
+    color: #555;
+    padding: 0 2px;
+    user-select: none;
+}
+
+footer {
+    background: var(--dark);
+    color: #aaa;
+    text-align: center;
+    padding: 20px 30px;
+    font-size: 0.85rem;
+    border-top: 3px solid var(--bordeaux);
+    margin-top: auto;
+}
+
+footer strong {
+    color: var(--gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+}
+
+footer a {
+    color: #aaa;
+}
+
+footer a:hover {
+    color: var(--gold);
+}

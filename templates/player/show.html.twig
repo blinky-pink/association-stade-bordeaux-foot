@@ -6,6 +6,26 @@
 <h1>{{ player.firstName }} {{ player.lastName }}</h1>
 
 <div class="show-info">
+
+    {# Formulaire caché pour upload direct de la photo #}
+    <form action="{{ path('player_photo_upload', {id: player.id}) }}" method="POST" enctype="multipart/form-data" id="photoForm">
+        <input type="file" name="photoFile" id="photoInput" accept="image/*" capture="environment" style="display:none">
+
+        {% if player.photo %}
+            <img src="{{ asset('uploads/photos/' ~ player.photo) }}"
+                 alt="Photo de {{ player.firstName }}"
+                 class="player-photo player-photo-clickable"
+                 onclick="document.getElementById('photoInput').click()"
+                 title="Cliquer pour changer la photo">
+        {% else %}
+            <div class="player-photo-placeholder player-photo-clickable"
+                 onclick="document.getElementById('photoInput').click()"
+                 title="Cliquer pour ajouter une photo">
+                📷 Ajouter une photo
+            </div>
+        {% endif %}
+    </form>
+
     <p><strong>Équipe :</strong> {{ player.team.name }}</p>
     <p><strong>Naissance :</strong> {{ player.birthDate|date('d/m/Y') }}</p>
 </div>
@@ -15,17 +35,26 @@
     <thead>
         <tr>
             <th>Événement</th>
+            <th>Date</th>
             <th>Statut</th>
         </tr>
     </thead>
     <tbody>
         {% for presence in player.getPresences() %}
+        {% set event = presence.getEvent() %}
+        {% set isPast = event.getEventDate() < date() %}
         <tr>
-            <td>{{ presence.getEvent().getTitle() }}</td>
+            <td>{{ event.getTitle() }}</td>
+            <td>
+                {{ event.getEventDate()|date('d/m/Y') }}
+                <span class="event-badge {{ isPast ? 'badge-past' : 'badge-upcoming' }}">
+                    {{ isPast ? 'Passé' : 'À venir' }}
+                </span>
+            </td>
             <td><span class="event-badge">{{ presence.status }}</span></td>
         </tr>
         {% else %}
-        <tr><td colspan="2" class="td-empty">Aucune présence.</td></tr>
+        <tr><td colspan="3" class="td-empty">Aucune présence.</td></tr>
         {% endfor %}
     </tbody>
 </table>
@@ -33,4 +62,14 @@
 <div class="show-actions">
     <a href="{{ path('player_list') }}" class="btn btn-secondary">Retour à la liste</a>
 </div>
+
+<script>
+    // Dès qu'une photo est sélectionnée, le formulaire se soumet automatiquement
+    document.getElementById('photoInput').addEventListener('change', function() {
+        if (this.files.length > 0) {
+            document.getElementById('photoForm').submit();
+        }
+    });
+</script>
+
 {% endblock %}

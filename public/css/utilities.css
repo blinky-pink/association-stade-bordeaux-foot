@@ -1,0 +1,109 @@
+
+/* ==== BOUTONS UTILITAIRES ==== */
+.btn {
+    display: inline-block;
+    padding: 8px 18px;
+    min-width: 110px;
+    text-align: center;
+    border-radius: var(--radius);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all var(--transition);
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: var(--bordeaux);
+    color: var(--white);
+}
+.btn-primary:hover {
+    background: var(--bordeaux-dark);
+    color: var(--white);
+    text-decoration: none;
+}
+
+.btn-secondary {
+    background: #666;
+    color: var(--white);
+    border-color: #666;
+}
+.btn-secondary:hover {
+    background: #444;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.btn-delete {
+    background: #444;
+    color: var(--white);
+    border-color: #444;
+}
+.btn-delete:hover {
+    background: #222;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.btn-gold {
+    background: var(--gold);
+    color: var(--dark);
+}
+.btn-gold:hover {
+    background: var(--gold-light);
+    color: var(--dark);
+    text-decoration: none;
+}
+
+/* ==== MESSAGES FLASH / ALERTES ==== */
+.alert {
+    padding: 13px 18px;
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.alert-success {
+    background: #e8f5e9;
+    color: #1a7a2e;
+    border-left: 4px solid #1a7a2e;
+}
+
+.alert-error {
+    background: #fdecea;
+    color: var(--bordeaux);
+    border-left: 4px solid var(--bordeaux);
+}
+
+.alert-info {
+    background: #e3f0fb;
+    color: #1565c0;
+    border-left: 4px solid #1565c0;
+}
+/* ==== UTILITAIRES ==== */
+.text-right  { text-align: right; }
+.text-center { text-align: center; }
+.mb-18       { margin-bottom: 18px; }
+.no-wrap     { white-space: nowrap; }
+.muted       { color: #aaa; }
+
+.td-actions {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.td-empty {
+    text-align: center;
+    color: #aaa;
+    padding: 30px !important;
+}
+
+.actions-bar {
+    text-align: right;
+    margin-bottom: 18px;
+}

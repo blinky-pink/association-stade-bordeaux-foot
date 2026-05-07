@@ -30,7 +30,7 @@ class Event
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Coach $Coach = null;
+    private ?Coach $coach = null;
 
     /**
      * @var Collection<int, Presence>
@@ -95,15 +95,15 @@ class Event
 
         return $this;
     }
-
+    
     public function getCoach(): ?Coach
     {
-        return $this->Coach;
+        return $this->coach;
     }
 
-    public function setCoach(?Coach $Coach): static
+    public function setCoach(?Coach $coach): static
     {
-        $this->Coach = $Coach;
+        $this->coach = $coach;
 
         return $this;
     }

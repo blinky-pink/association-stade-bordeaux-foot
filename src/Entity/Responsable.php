@@ -24,7 +24,7 @@ class Responsable
 
     #[ORM\ManyToOne(inversedBy: 'responsables')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Player $Player = null;
+    private ?Player $player = null;
 
     public function getId(): ?int
     {
@@ -39,19 +39,17 @@ class Responsable
     public function setName(string $Name): static
     {
         $this->Name = $Name;
-
         return $this;
     }
 
     public function getEmail(): ?string
     {
-        return $this->Email;
+        return $this->Email;  // ✅ majuscule
     }
 
     public function setEmail(?string $Email): static
     {
-        $this->Email = $Email;
-
+        $this->Email = $Email;  // ✅ majuscule
         return $this;
     }
 
@@ -63,19 +61,17 @@ class Responsable
     public function setPhone(string $Phone): static
     {
         $this->Phone = $Phone;
-
         return $this;
     }
 
     public function getPlayer(): ?Player
     {
-        return $this->Player;
+        return $this->player;
     }
 
-    public function setPlayer(?Player $Player): static
+    public function setPlayer(?Player $player): static
     {
-        $this->Player = $Player;
-
+        $this->player = $player;
         return $this;
     }
 }

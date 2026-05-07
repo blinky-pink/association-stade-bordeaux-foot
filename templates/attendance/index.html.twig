@@ -10,7 +10,7 @@
 <div class="players">
     {% for player in players %}
         <div class="card">
-            <img src="{{ player.photo ?? '/default.png' }}" alt="photo joueur">
+            <img src="{{ player.photo ? asset('uploads/photos/' ~ player.photo) : asset('default.png') }}" alt="photo joueur"
 
             <h3>{{ player.firstName }} {{ player.lastName }}</h3>
 

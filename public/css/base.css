@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap');
+
+/* =============================================
+   VARIABLES & RESET
+   ============================================= */
+:root {
+    --bordeaux:     #7a0000;
+    --bordeaux-dark:#550000;
+    --bordeaux-light:#a30000;
+    --gold:         #c9a84c;
+    --gold-light:   #f0d078;
+    --dark:         #1a1a1a;
+    --mid:          #444;
+    --light-gray:   #f4f4f4;
+    --white:        #ffffff;
+    --border:       #ddd;
+    --shadow:       0 2px 12px rgba(0,0,0,0.10);
+    --shadow-hover: 0 6px 24px rgba(122,0,0,0.18);
+    --radius:       8px;
+    --transition:   0.22s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Source Sans 3', Arial, sans-serif;
+    background-image: url('../terrain.avif');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #f0eeec;
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+hr {
+    display: none;
+}

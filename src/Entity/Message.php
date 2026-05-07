@@ -28,11 +28,11 @@ class Message
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Coach $Coach = null;
+    private ?Coach $coach = null;
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Player $Player = null;
+    private ?Player $player = null;
 
     public function getId(): ?int
     {
@@ -47,7 +47,6 @@ class Message
     public function setTitle(string $Title): static
     {
         $this->Title = $Title;
-
         return $this;
     }
 
@@ -59,7 +58,6 @@ class Message
     public function setContent(string $Content): static
     {
         $this->Content = $Content;
-
         return $this;
     }
 
@@ -71,7 +69,6 @@ class Message
     public function setType(string $Type): static
     {
         $this->Type = $Type;
-
         return $this;
     }
 
@@ -83,31 +80,28 @@ class Message
     public function setSendAt(\DateTime $SendAt): static
     {
         $this->SendAt = $SendAt;
-
         return $this;
     }
 
     public function getCoach(): ?Coach
     {
-        return $this->Coach;
+        return $this->coach;
     }
 
-    public function setCoach(?Coach $Coach): static
+    public function setCoach(?Coach $coach): static
     {
-        $this->Coach = $Coach;
-
+        $this->coach = $coach;
         return $this;
     }
 
     public function getPlayer(): ?Player
     {
-        return $this->Player;
+        return $this->player;
     }
 
-    public function setPlayer(?Player $Player): static
+    public function setPlayer(?Player $player): static
     {
-        $this->Player = $Player;
-
+        $this->player = $player;
         return $this;
     }
 }

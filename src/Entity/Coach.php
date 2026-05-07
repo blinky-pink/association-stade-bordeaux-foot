@@ -24,19 +24,19 @@ class Coach
     /**
      * @var Collection<int, Team>
      */
-    #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'Coach')]
+    #[ORM\OneToMany(targetEntity: Team::class, mappedBy: 'coach')]
     private Collection $teams;
 
     /**
      * @var Collection<int, Event>
      */
-    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'Coach')]
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'coach')]
     private Collection $events;
 
     /**
      * @var Collection<int, Message>
      */
-    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'Coach')]
+    #[ORM\OneToMany(targetEntity: Message::class, mappedBy: 'coach')]
     private Collection $messages;
 
     public function __construct()

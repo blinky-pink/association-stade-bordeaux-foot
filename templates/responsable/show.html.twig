@@ -3,18 +3,217 @@
 {% block title %}Responsable : {{ responsable.name }}{% endblock %}
 
 {% block body %}
-<h1>{{ responsable.name }}</h1>
 
-<p>Téléphone : {{ responsable.phone }}</p>
+<div class="show-wrapper">
 
-{% if responsable.email %}
-    <p>Email : {{ responsable.email }}</p>
-{% endif %}
+    <h1 class="show-title">{{ responsable.name }}</h1>
+    <div class="show-separator"></div>
 
-<p>
-    Responsable de :
-    {{ responsable.player.firstName }} {{ responsable.player.lastName }}
-</p>
+    <div class="show-meta-grid">
 
-<a href="{{ path('responsable_list') }}">Retour à la liste</a>
+        <div class="show-meta-item">
+            <span class="show-meta-label">Téléphone</span>
+            <span class="show-meta-value">
+                <a href="tel:{{ responsable.phone }}" class="show-link">{{ responsable.phone }}</a>
+            </span>
+        </div>
+
+        {% if responsable.email %}
+        <div class="show-meta-item">
+            <span class="show-meta-label">Email</span>
+            <span class="show-meta-value">
+                <a href="mailto:{{ responsable.email }}" class="show-link">{{ responsable.email }}</a>
+            </span>
+        </div>
+        {% endif %}
+
+        <div class="show-meta-item">
+            <span class="show-meta-label">Responsable de</span>
+            <span class="show-meta-value">
+                {{ responsable.player.firstName }} {{ responsable.player.lastName }}
+            </span>
+        </div>
+
+    </div>
+
+    <div class="show-content-block">
+        <div class="show-content-header">Joueur associé</div>
+        <div class="show-player-row">
+            <div class="show-player-avatar">
+                {{ responsable.player.firstName|first|upper }}{{ responsable.player.lastName|first|upper }}
+            </div>
+            <div class="show-player-info">
+                <span class="show-player-name">{{ responsable.player.firstName }} {{ responsable.player.lastName }}</span>
+                <a href="{{ path('player_show', { id: responsable.player.id }) }}" class="show-player-link">Voir la fiche joueur →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="show-actions">
+        <a href="{{ path('responsable_list') }}" class="btn-back">← Retour à la liste</a>
+    </div>
+
+</div>
+
+<style>
+.show-wrapper {
+    max-width: 700px;
+    margin: 3rem auto;
+    background: rgba(245, 242, 235, 0.95);
+    border-radius: 8px;
+    padding: 2.5rem 2.5rem 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+.show-title {
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: #7a1c1c;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin: 0 0 .75rem;
+}
+
+.show-separator {
+    height: 3px;
+    background: linear-gradient(to right, transparent, #b8963e, transparent);
+    margin: 0 auto 2rem;
+    width: 80%;
+}
+
+.show-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid #c9b99a;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.show-meta-item {
+    display: flex;
+    flex-direction: column;
+    padding: .9rem 1rem;
+    border-right: 1px solid #c9b99a;
+    background: #fff;
+}
+
+.show-meta-item:last-child { border-right: none; }
+
+.show-meta-label {
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: #7a1c1c;
+    color: #fff;
+    padding: .18rem .45rem;
+    border-radius: 2px;
+    align-self: flex-start;
+    margin-bottom: .4rem;
+}
+
+.show-meta-value {
+    font-size: .92rem;
+    font-weight: 600;
+    color: #2d2d2d;
+}
+
+.show-link {
+    color: #7a1c1c;
+    text-decoration: none;
+    font-weight: 600;
+}
+.show-link:hover { text-decoration: underline; }
+
+/* Bloc joueur associé */
+.show-content-block {
+    border: 1px solid #c9b99a;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.75rem;
+}
+
+.show-content-header {
+    background: #7a1c1c;
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .6rem 1rem;
+}
+
+.show-player-row {
+    background: #fff;
+    padding: 1.1rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.show-player-avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: #7a1c1c;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: .9rem;
+    flex-shrink: 0;
+    letter-spacing: .03em;
+}
+
+.show-player-info {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+
+.show-player-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2d2d2d;
+}
+
+.show-player-link {
+    font-size: .82rem;
+    color: #7a1c1c;
+    text-decoration: none;
+    font-weight: 600;
+}
+.show-player-link:hover { text-decoration: underline; }
+
+/* Actions */
+.show-actions { display: flex; gap: 1rem; }
+
+.btn-back {
+    display: inline-block;
+    background: #4a4a4a;
+    color: #fff;
+    text-decoration: none;
+    padding: .55rem 1.2rem;
+    border-radius: 4px;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    transition: background .2s;
+}
+.btn-back:hover { background: #2d2d2d; }
+
+@media (max-width: 580px) {
+    .show-wrapper { padding: 1.25rem 1rem; }
+    .show-meta-grid { grid-template-columns: 1fr 1fr; }
+    .show-meta-item { border-bottom: 1px solid #c9b99a; }
+    .show-meta-item:nth-child(even) { border-right: none; }
+}
+</style>
+
 {% endblock %}

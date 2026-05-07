@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class PlayerController extends AbstractController
 {
@@ -41,24 +42,28 @@ class PlayerController extends AbstractController
 
     // Créer un nouveau joueur
     #[Route('/players/create', name: 'player_create')]
-    public function create(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
     {
-        // Crée un joueur vide
         $player = new Player();
-
-        // Crée le formulaire lié au joueur
         $form = $this->createForm(PlayerType::class, $player);
-
-        // Analyse la requête HTTP (données du formulaire soumis)
         $form->handleRequest($request);
 
-        // Si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Prépare et enregistre en base
+
+            // Gestion de la photo
+            $photoFile = $form->get('photoFile')->getData();
+            if ($photoFile) {
+                $newFilename = uniqid() . '.' . $photoFile->guessExtension();
+                $photoFile->move(
+                    $this->getParameter('photos_directory'),
+                    $newFilename
+                );
+                $player->setPhoto($newFilename);
+            }
+
             $em->persist($player);
             $em->flush();
 
-            // Redirige vers la liste des joueurs
             return $this->redirectToRoute('player_list');
         }
 
@@ -67,53 +72,91 @@ class PlayerController extends AbstractController
         ]);
     }
 
-     // Modifier un joueur existant
-        #[Route('/players/edit/{id}', name: 'player_edit')]
-        public function edit(int $id, Request $request, PlayerRepository $playerRepository, EntityManagerInterface $em): Response
-        {
-            // Récupère le joueur à modifier
-            $player = $playerRepository->find($id);
-    
-            if (!$player) {
-                throw $this->createNotFoundException('Joueur introuvable');
-            }
-    
-            // Crée le formulaire pré-rempli avec les données du joueur
-            $form = $this->createForm(PlayerType::class, $player);
-            $form->handleRequest($request);
-    
-            if ($form->isSubmitted() && $form->isValid()) {
-                // Pas besoin de persist() car le joueur existe déjà
-                $em->flush();
-    
-                return $this->redirectToRoute('player_list');
-            }
-    
-            return $this->render('player/edit.html.twig', [
-                'form' => $form,
-                'player' => $player,
-            ]);
+    // Modifier un joueur existant
+    #[Route('/players/edit/{id}', name: 'player_edit')]
+    public function edit(int $id, Request $request, PlayerRepository $playerRepository, EntityManagerInterface $em, SluggerInterface $slugger): Response
+    {
+        $player = $playerRepository->find($id);
+
+        if (!$player) {
+            throw $this->createNotFoundException('Joueur introuvable');
         }
-    
-        // Supprimer un joueur
-        #[Route('/players/delete/{id}', name: 'player_delete')]
-        public function delete(int $id, PlayerRepository $playerRepository, EntityManagerInterface $em): Response
-        {
-            $player = $playerRepository->find($id);
-    
-            if (!$player) {
-                throw $this->createNotFoundException('Joueur introuvable');
+
+        $form = $this->createForm(PlayerType::class, $player);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Gestion de la photo
+            $photoFile = $form->get('photoFile')->getData();
+            if ($photoFile) {
+                $newFilename = uniqid() . '.' . $photoFile->guessExtension();
+                $photoFile->move(
+                    $this->getParameter('photos_directory'),
+                    $newFilename
+                );
+                $player->setPhoto($newFilename);
             }
 
-            // Supprime d'abord les présences liées au joueur
-                foreach ($player->getPresences() as $presence) {
-                    $em->remove($presence);
-                }
-    
-            // Supprime le joueur de la base
-            $em->remove($player);
             $em->flush();
-    
+
             return $this->redirectToRoute('player_list');
         }
+
+        return $this->render('player/edit.html.twig', [
+            'form' => $form,
+            'player' => $player,
+        ]);
+    }
+
+    // Supprimer un joueur
+    #[Route('/players/delete/{id}', name: 'player_delete')]
+    public function delete(int $id, PlayerRepository $playerRepository, EntityManagerInterface $em): Response
+    {
+        $player = $playerRepository->find($id);
+
+        if (!$player) {
+            throw $this->createNotFoundException('Joueur introuvable');
+        }
+
+        // Supprime d'abord les présences liées au joueur
+        foreach ($player->getPresences() as $presence) {
+            $em->remove($presence);
+        }
+
+        // Supprime le joueur de la base
+        $em->remove($player);
+        $em->flush();
+        
+        return $this->redirectToRoute('player_list');
+    }
+
+    #[Route('/player/{id}/photo', name: 'player_photo_upload', methods: ['POST'])]
+    public function uploadPhoto(int $id, Request $request, PlayerRepository $playerRepository, EntityManagerInterface $em): Response
+    {
+        $player = $playerRepository->find($id);
+
+        if (!$player) {
+            throw $this->createNotFoundException('Joueur introuvable');
+        }
+
+        $photoFile = $request->files->get('photoFile');
+
+        if ($photoFile) {
+            $mimeType = $photoFile->getMimeType();
+            $allowedMimes = ['image/jpeg', 'image/png', 'image/webp'];
+
+            if (in_array($mimeType, $allowedMimes) && $photoFile->getSize() <= 2 * 1024 * 1024) {
+                $newFilename = uniqid() . '.' . $photoFile->guessExtension();
+                $photoFile->move(
+                    $this->getParameter('photos_directory'),
+                    $newFilename
+                );
+                $player->setPhoto($newFilename);
+                $em->flush();
+            }
+        }
+
+        return $this->redirectToRoute('player_show', ['id' => $id]);
+    }
 }

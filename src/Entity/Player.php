@@ -46,9 +46,9 @@ class Player
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $CoachNote = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Players')]
+    #[ORM\ManyToOne(inversedBy: 'players')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Team $Team = null;
+    private ?Team $team = null;
 
     /**
      * @var Collection<int, Responsable>
@@ -88,7 +88,6 @@ class Player
     public function setFirstName(string $FirstName): static
     {
         $this->FirstName = $FirstName;
-
         return $this;
     }
 
@@ -100,7 +99,6 @@ class Player
     public function setLastName(string $LastName): static
     {
         $this->LastName = $LastName;
-
         return $this;
     }
 
@@ -112,7 +110,6 @@ class Player
     public function setBirthDate(\DateTime $BirthDate): static
     {
         $this->BirthDate = $BirthDate;
-
         return $this;
     }
 
@@ -124,7 +121,6 @@ class Player
     public function setPhone(?string $Phone): static
     {
         $this->Phone = $Phone;
-
         return $this;
     }
 
@@ -136,7 +132,6 @@ class Player
     public function setPosition(?string $Position): static
     {
         $this->Position = $Position;
-
         return $this;
     }
 
@@ -148,7 +143,6 @@ class Player
     public function setPhoto(?string $Photo): static
     {
         $this->Photo = $Photo;
-
         return $this;
     }
 
@@ -160,7 +154,6 @@ class Player
     public function setJerseySize(?string $JerseySize): static
     {
         $this->JerseySize = $JerseySize;
-
         return $this;
     }
 
@@ -172,7 +165,6 @@ class Player
     public function setShortsSize(?string $ShortsSize): static
     {
         $this->ShortsSize = $ShortsSize;
-
         return $this;
     }
 
@@ -184,7 +176,6 @@ class Player
     public function setMedicalInfo(?string $MedicalInfo): static
     {
         $this->MedicalInfo = $MedicalInfo;
-
         return $this;
     }
 
@@ -196,19 +187,17 @@ class Player
     public function setCoachNote(?string $CoachNote): static
     {
         $this->CoachNote = $CoachNote;
-
         return $this;
     }
 
     public function getTeam(): ?Team
     {
-        return $this->Team;
+        return $this->team;
     }
 
-    public function setTeam(?Team $Team): static
+    public function setTeam(?Team $team): static
     {
-        $this->Team = $Team;
-
+        $this->team = $team;
         return $this;
     }
 
@@ -226,19 +215,16 @@ class Player
             $this->responsables->add($responsable);
             $responsable->setPlayer($this);
         }
-
         return $this;
     }
 
     public function removeResponsable(Responsable $responsable): static
     {
         if ($this->responsables->removeElement($responsable)) {
-            // set the owning side to null (unless already changed)
             if ($responsable->getPlayer() === $this) {
                 $responsable->setPlayer(null);
             }
         }
-
         return $this;
     }
 
@@ -256,19 +242,16 @@ class Player
             $this->presences->add($presence);
             $presence->setPlayer($this);
         }
-
         return $this;
     }
 
     public function removePresence(Presence $presence): static
     {
         if ($this->presences->removeElement($presence)) {
-            // set the owning side to null (unless already changed)
             if ($presence->getPlayer() === $this) {
                 $presence->setPlayer(null);
             }
         }
-
         return $this;
     }
 
@@ -286,19 +269,16 @@ class Player
             $this->messages->add($message);
             $message->setPlayer($this);
         }
-
         return $this;
     }
 
     public function removeMessage(Message $message): static
     {
         if ($this->messages->removeElement($message)) {
-            // set the owning side to null (unless already changed)
             if ($message->getPlayer() === $this) {
                 $message->setPlayer(null);
             }
         }
-
         return $this;
     }
 }

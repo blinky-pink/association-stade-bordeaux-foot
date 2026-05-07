@@ -1,0 +1,144 @@
+/* =============================================
+   TABLEAUX
+   ============================================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    margin: 20px 0;
+}
+
+thead {
+    background: var(--bordeaux);
+    color: var(--white);
+}
+
+thead th {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.88rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 13px 16px;
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background var(--transition);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: rgba(122,0,0,0.04);
+}
+
+tbody td {
+    padding: 11px 16px;
+    font-size: 0.95rem;
+}
+
+/* =============================================
+   FORMULAIRES
+   ============================================= */
+form {
+    background: var(--white);
+    padding: 28px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+    border-top: 4px solid var(--bordeaux);
+}
+
+label {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--mid);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    margin-top: 14px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.97rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    background: #fafafa;
+    color: var(--dark);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--bordeaux);
+    box-shadow: 0 0 0 3px rgba(122,0,0,0.10);
+    background: var(--white);
+}
+
+button, input[type="submit"] {
+    background-color: var(--bordeaux);
+    color: var(--white);
+    padding: 11px 26px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 14px;
+    transition: background var(--transition), transform var(--transition);
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--bordeaux-dark);
+    transform: translateY(-1px);
+}
+
+/* =============================================
+   PHOTO JOUEUR
+   ============================================= */
+.player-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--bordeaux);
+    display: block;
+    margin: 0 auto 16px;
+}
+
+.player-photo-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--bordeaux);
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    color: var(--mid);
+    font-size: 0.85rem;
+}
+
+.player-photo-clickable {
+    cursor: pointer;
+    transition: opacity var(--transition);
+}
+
+.player-photo-clickable:hover {
+    opacity: 0.8;
+}

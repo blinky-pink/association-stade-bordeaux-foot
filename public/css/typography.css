@@ -1,0 +1,77 @@
+/* ==== TITRES ====*/
+
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--bordeaux);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 10px;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--mid);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 28px 0 12px 40px;
+    padding-left: 10px;
+    border-left: 4px solid var(--bordeaux);
+}
+
+h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+/* ==== LIENS ===== */
+a {
+    color: var(--bordeaux);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--bordeaux-light);
+    text-decoration: underline;
+}
+
+/* ==== LISTES ==== */
+ul {
+    list-style: none;
+    padding: 0 0 0 40px;
+    margin: 0 0 20px 0;
+}
+
+ul li {
+    padding: 10px 14px;
+    transition: background var(--transition);
+    border-radius: 4px;
+}
+
+ul li:hover {
+    background: rgba(122,0,0,0.05);
+}
+
+ul li a {
+    font-weight: 600;
+}
+
+/* ==== CONTENU PRINCIPAL ==== */
+main {
+    flex: 1;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px 40px;
+    background: rgba(255, 255, 255, 0.88);
+    border-radius: 8px;
+}

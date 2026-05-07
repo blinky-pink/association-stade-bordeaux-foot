@@ -3,15 +3,179 @@
 {% block title %}Message : {{ message.title }}{% endblock %}
 
 {% block body %}
-<h1>{{ message.title }}</h1>
 
-<p>Type : {{ message.type }}</p>
-<p>Date d'envoi : {{ message.sendAt|date('d/m/Y') }}</p>
-<p>De : {{ message.coach.name }}</p>
-<p>À : {{ message.player.firstName }} {{ message.player.lastName }}</p>
+<div class="show-wrapper">
 
-<h2>Contenu</h2>
-<p>{{ message.content }}</p>
+    <h1 class="show-title">{{ message.title }}</h1>
+    <div class="show-separator"></div>
 
-<a href="{{ path('message_list') }}">Retour à la liste</a>
+    <div class="show-meta-grid">
+
+        <div class="show-meta-item">
+            <span class="show-meta-label">Type</span>
+            <span class="show-meta-value show-badge">{{ message.type }}</span>
+        </div>
+
+        <div class="show-meta-item">
+            <span class="show-meta-label">Date d'envoi</span>
+            <span class="show-meta-value">{{ message.sendAt|date('d/m/Y') }}</span>
+        </div>
+
+        <div class="show-meta-item">
+            <span class="show-meta-label">De</span>
+            <span class="show-meta-value">{{ message.coach.name }}</span>
+        </div>
+
+        <div class="show-meta-item">
+            <span class="show-meta-label">À</span>
+            <span class="show-meta-value">{{ message.player.firstName }} {{ message.player.lastName }}</span>
+        </div>
+
+    </div>
+
+    <div class="show-content-block">
+        <div class="show-content-header">Contenu du message</div>
+        <div class="show-content-body">
+            {{ message.content }}
+        </div>
+    </div>
+
+    <div class="show-actions">
+        <a href="{{ path('message_list') }}" class="btn-back">← Retour à la liste</a>
+    </div>
+
+</div>
+
+<style>
+.show-wrapper {
+    max-width: 700px;
+    margin: 3rem auto;
+    background: rgba(245, 242, 235, 0.95);
+    border-radius: 8px;
+    padding: 2.5rem 2.5rem 2rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+}
+
+.show-title {
+    text-align: center;
+    font-family: 'Georgia', serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    color: #7a1c1c;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin: 0 0 .75rem;
+}
+
+.show-separator {
+    height: 3px;
+    background: linear-gradient(to right, transparent, #b8963e, transparent);
+    margin: 0 auto 2rem;
+    width: 80%;
+}
+
+.show-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid #c9b99a;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.show-meta-item {
+    display: flex;
+    flex-direction: column;
+    padding: .9rem 1rem;
+    border-right: 1px solid #c9b99a;
+    background: #fff;
+}
+
+.show-meta-item:last-child { border-right: none; }
+
+.show-meta-label {
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background: #7a1c1c;
+    color: #fff;
+    padding: .18rem .45rem;
+    border-radius: 2px;
+    align-self: flex-start;
+    margin-bottom: .4rem;
+}
+
+.show-meta-value {
+    font-size: .92rem;
+    font-weight: 600;
+    color: #2d2d2d;
+}
+
+.show-badge {
+    display: inline-block;
+    background: #f0e8d5;
+    border: 1px solid #c9b99a;
+    border-radius: 3px;
+    padding: .1rem .5rem;
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #5a3a00;
+}
+
+.show-content-block {
+    border: 1px solid #c9b99a;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.75rem;
+}
+
+.show-content-header {
+    background: #7a1c1c;
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .6rem 1rem;
+}
+
+.show-content-body {
+    background: #fff;
+    padding: 1.25rem 1rem;
+    color: #2d2d2d;
+    font-size: .95rem;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    min-height: 80px;
+}
+
+.show-actions { display: flex; gap: 1rem; }
+
+.btn-back {
+    display: inline-block;
+    background: #4a4a4a;
+    color: #fff;
+    text-decoration: none;
+    padding: .55rem 1.2rem;
+    border-radius: 4px;
+    font-size: .82rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    transition: background .2s;
+}
+.btn-back:hover { background: #2d2d2d; }
+
+@media (max-width: 580px) {
+    .show-wrapper { padding: 1.25rem 1rem; }
+    .show-meta-grid { grid-template-columns: 1fr 1fr; }
+    .show-meta-item { border-bottom: 1px solid #c9b99a; }
+    .show-meta-item:nth-child(even) { border-right: none; }
+}
+</style>
+
 {% endblock %}
