@@ -25,6 +25,10 @@ header .header-title span {
     color: var(--gold);
 }
 
+.header-logo-side {
+    height: 80px;
+    opacity: 0.85;
+}
 /* ==== NAVIGATION ==== */
 nav {
     background-color: var(--dark);

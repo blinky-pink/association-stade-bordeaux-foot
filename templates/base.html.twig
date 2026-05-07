@@ -14,37 +14,30 @@
     </head>
     <body>
 
-        {# Header avec logo #}
         <header>
-            <img src="{{ asset('logo1.jpg') }}" alt="Logo Association de foot Stade Bordelais">
+           
+            <img src="{{ asset('logo1.jpg') }}" alt="Logo Association de foot Stade Bordelais" class="header-logo-main">
+            
         </header>
 
-        {# Menu de navigation principal #}
         <nav>
             <a href="{{ path('dashboard') }}"><strong>Stade Bordeaux</strong></a>
-            
             <a href="{{ path('team_list') }}">Équipes</a>
-            
             <a href="{{ path('coach_list') }}">Coachs</a>
-            
             <a href="{{ path('event_list') }}">Événements</a>
-            
             <a href="{{ path('message_list') }}">Messages</a>
-            
             <a href="{{ path('responsable_list') }}">Responsables</a>
-            
             <a href="{{ path('player_list') }}">Joueurs</a>
-
             <a href="{{ path('app_logout') }}">Déconnexion</a>
         </nav>
 
-    <main>
-        {% block body %}{% endblock %}
-    </main>
- 
-    <footer>
-        <strong>Stade Bordeaux</strong> - Association Football - {{ "now"|date("Y") }}
-    </footer>
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+     
+        <footer>
+            <strong>Stade Bordeaux</strong> - Association Football - {{ "now"|date("Y") }}
+        </footer>
 
     </body>
 </html>

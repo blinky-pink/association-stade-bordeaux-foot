@@ -74,4 +74,28 @@ main {
     padding: 30px 40px;
     background: rgba(255, 255, 255, 0.88);
     border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+main::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background-image: url('../logo_stade_bordeaux_3.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.08;  /* très très léger — augmente si tu veux plus visible */
+    pointer-events: none;
+    z-index: 0;
+}
+
+main > * {
+    position: relative;
+    z-index: 1;
 }
